@@ -2,6 +2,8 @@
   "extends": "./tsconfig",
   "compilerOptions": {
     "allowJs": false,
-    "checkJs": false
-  }
+    "checkJs": false,
+    "outDir": "tmp"
+  },
+  "include": ["lib/**/*.spec.ts", "lib/**/*.d.ts", "test/"]
 }

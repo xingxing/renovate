@@ -12,6 +12,7 @@
     "clean": "rimraf dist tmp",
     "clean-cache": "node tools/clean-cache.mjs",
     "compile:ts": "tsc -p tsconfig.app.json",
+    "compile-test": "tsc -p tsconfig.spec.json",
     "config-validator": "node -r ts-node/register/transpile-only -- lib/config-validator.ts",
     "create-json-schema": "node -r ts-node/register/transpile-only -- tools/generate-schema.ts && prettier --write \"renovate-schema.json\"",
     "debug": "node --inspect-brk -r ts-node/register/transpile-only  -- lib/renovate.ts",

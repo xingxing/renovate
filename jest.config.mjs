@@ -1,9 +1,7 @@
-import type { InitialOptionsTsJest } from 'ts-jest/dist/types';
-
 const ci = !!process.env.CI;
 
-const config: InitialOptionsTsJest = {
-  preset: 'ts-jest',
+/** @type {import('@jest/types').Config.InitialOptions} */
+const config = {
   cacheDirectory: '.cache/jest',
   coverageDirectory: './coverage',
   collectCoverage: true,
@@ -25,7 +23,7 @@ const config: InitialOptionsTsJest = {
     },
   },
   modulePathIgnorePatterns: ['<rootDir>/dist/', '/__fixtures__/'],
-  reporters: ci ? ['default', 'jest-github-actions-reporter'] : ['default'],
+  // reporters: ci ? ['default', 'jest-github-actions-reporter'] : ['default'],
   setupFilesAfterEnv: [
     'jest-extended/all',
     'expect-more-jest',
@@ -36,6 +34,12 @@ const config: InitialOptionsTsJest = {
   testEnvironment: 'node',
   testRunner: 'jest-circus/runner',
   watchPathIgnorePatterns: ['<rootDir>/.cache/', '<rootDir>/coverage/'],
+};
+
+/** @type {import('ts-jest').InitialOptionsTsJest} */
+const localConfig = {
+  preset: 'ts-jest',
+  coverageReporters: ['html', 'text-summary'],
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
@@ -45,4 +49,31 @@ const config: InitialOptionsTsJest = {
   },
 };
 
-export default config;
+/** @type {import('@jest/types').Config.InitialOptions} */
+const ciConfig = {
+  collectCoverageFrom: [
+    'tmp/**/*.js',
+    '!tmp/**/*.spec.js',
+    '!lib/**/{__fixtures__,__mocks__,__testutil__,test}/**/*.js',
+    '!lib/**/types.js',
+  ],
+  coverageReporters: ['html', 'json', 'text-summary'],
+  moduleFileExtensions: ['js'],
+  moduleNameMapper: {
+    '\\/expose.cjs$': '<rootDir>/lib/expose.cjs',
+  },
+  setupFilesAfterEnv: [
+    'jest-extended/all',
+    'expect-more-jest',
+    '<rootDir>/tmp/test/setup.js',
+    '<rootDir>/tmp/test/to-migrate.js',
+  ],
+  snapshotSerializers: ['<rootDir>/tmp/test/newline-snapshot-serializer.js'],
+  // testMatch: ['tmp/**/*.spec.js'],
+  // transform: {},
+};
+
+export default {
+  ...config,
+  ...(ci ? ciConfig : localConfig),
+};
