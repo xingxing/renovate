@@ -1499,6 +1499,38 @@ const options: RenovateOptions[] = [
     env: false,
     supportedPlatforms: ['github'],
   },
+  {
+    name: 'osvVulnerabilityAlerts',
+    description: 'Use vulnerability alerts from osv.dev',
+    type: 'boolean',
+    default: false,
+    releaseStatus: 'unpublished',
+    // GitHub is not supported as it already provides vulnerability alerts
+    supportedPlatforms: [
+      'azure',
+      'bitbucket',
+      'bitbucket-server',
+      'gitea',
+      'gitlab',
+    ],
+    supportedManagers: [
+      'bundler',
+      'cargo',
+      'gomod',
+      'gradle',
+      'maven',
+      'meteor',
+      'npm',
+      'nuget',
+      'pip-compile',
+      'pip_requirements',
+      'pip_setup',
+      'pipenv',
+      'poetry',
+      'setup-cfg',
+      'sbt',
+    ],
+  },
   // Default templates
   {
     name: 'branchName',

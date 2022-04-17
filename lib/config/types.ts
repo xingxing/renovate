@@ -217,6 +217,7 @@ export interface RenovateConfig
 
   warnings?: ValidationMessage[];
   vulnerabilityAlerts?: RenovateSharedConfig;
+  osvVulnerabilityAlerts?: boolean;
   regexManagers?: CustomManager[];
 
   fetchReleaseNotes?: boolean;

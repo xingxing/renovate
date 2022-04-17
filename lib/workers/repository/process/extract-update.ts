@@ -11,6 +11,7 @@ import { branchifyUpgrades } from '../updates/branchify';
 import { raiseDeprecationWarnings } from './deprecated';
 import { fetchUpdates } from './fetch';
 import { sortBranches } from './sort';
+import { Vulnerabilities } from './vulnerabilities';
 import { WriteUpdateResult, writeUpdates } from './write';
 
 export type ExtractResult = {
@@ -104,11 +105,26 @@ export async function extract(
   return packageFiles;
 }
 
+async function fetchVulnerabilities(
+  config: RenovateConfig,
+  packageFiles: Record<string, PackageFile[]>
+): Promise<void> {
+  if (config.osvVulnerabilityAlerts) {
+    try {
+      const vulnerabilities = await Vulnerabilities.create();
+      await vulnerabilities.fetchVulnerabilities(config, packageFiles);
+    } catch (err) {
+      logger.warn({ err }, 'Unable to read vulnerability information');
+    }
+  }
+}
+
 export async function lookup(
   config: RenovateConfig,
   packageFiles: Record<string, PackageFile[]>
 ): Promise<ExtractResult> {
   await fetchUpdates(config, packageFiles);
+  await fetchVulnerabilities(config, packageFiles);
   await raiseDeprecationWarnings(config, packageFiles);
   const { branches, branchList } = await branchifyUpgrades(
     config,
