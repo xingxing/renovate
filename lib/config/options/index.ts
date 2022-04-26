@@ -1501,7 +1501,7 @@ const options: RenovateOptions[] = [
   },
   {
     name: 'osvVulnerabilityAlerts',
-    description: 'Use vulnerability alerts from osv.dev',
+    description: 'Use vulnerability alerts from `osv.dev`.',
     type: 'boolean',
     default: false,
     releaseStatus: 'unpublished',
