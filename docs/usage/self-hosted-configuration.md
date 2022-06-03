@@ -127,16 +127,12 @@ For example:
 ## binarySource
 
 Renovate often needs to use third-party binaries in its PRs, like `npm` to update `package-lock.json` or `go` to update `go.sum`.
-By default, Renovate uses a child process to run such tools, so they must be:
+By default, Renovate uses a child process to run such tools, so if you run `renovate` from an `npm` install then each tool must be:
 
 - installed before running Renovate
 - available in the path
 
-But you can tell Renovate to use "sidecar" containers for third-party tools by setting `binarySource=docker`.
-For this to work, `docker` needs to be installed and the Docker socket available to Renovate.
-Now Renovate uses `docker run` to create containers like Node.js or Python to run tools in as-needed.
-
-Additionally, when Renovate is run inside a container built using [`containerbase/buildpack`](https://github.com/containerbase/buildpack), such as the official Renovate images on Docker Hub, then `binarySource=install` can be used.
+When Renovate is run inside a container built using [`containerbase/buildpack`](https://github.com/containerbase/buildpack), such as the official Renovate images on Docker Hub, then `binarySource=install` will be used.
 This mode means that Renovate will dynamically install the version of tools available, if supported.
 
 Supported tools for dynamic install are:
@@ -147,6 +143,12 @@ Supported tools for dynamic install are:
 - `npm`
 
 Tools not on this list fall back to `binarySource=global`.
+If you encounter any problems with dynamic install then you can disable dynamic installs by setting `binarySource=global` in global config.
+
+You can also tell Renovate to use "sidecar" containers for third-party tools by setting `binarySource=docker`.
+For this to work, `docker` needs to be installed and the Docker socket available to Renovate.
+Now Renovate uses `docker run` to create containers like Node.js or Python to run tools in as-needed.
+This works particularly well with Renovate's "slim" Docker image if you provide it with a Docker socket to use.
 
 ## cacheDir
 

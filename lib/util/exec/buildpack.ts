@@ -87,13 +87,7 @@ export function isDynamicInstall(
   toolConstraints?: Opt<ToolConstraint[]>
 ): boolean {
   const { binarySource } = GlobalConfig.get();
-  if (binarySource !== 'install') {
-    return false;
-  }
-  if (!isBuildpack()) {
-    logger.warn(
-      'binarySource=install is only compatible with images derived from containerbase/buildpack'
-    );
+  if (!(binarySource === 'install' && isBuildpack())) {
     return false;
   }
   return !!toolConstraints?.every((toolConstraint) =>

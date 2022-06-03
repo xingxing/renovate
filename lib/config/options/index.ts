@@ -268,7 +268,7 @@ const options: RenovateOptions[] = [
     globalOnly: true,
     type: 'string',
     allowedValues: ['global', 'docker', 'install'],
-    default: 'global',
+    default: 'install',
   },
   {
     name: 'redisUrl',
