@@ -18,7 +18,7 @@ export const BuiltInAzurePipelinesTaskMajorVersions: Map<string, string[]> =
     ['azureiotedge', ['2']],
     ['azurekeyvault', ['1', '2']],
     ['azuremonitoralerts', ['0']],
-    ['azuremonitor', ['1', '1']],
+    ['azuremonitor', ['0', '1']],
     ['azuremysqldeployment', ['1']],
     ['azurenlbmanagement', ['1']],
     ['azurepolicy', ['0']],
