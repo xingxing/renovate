@@ -25,3 +25,9 @@ jobs:
           fetch-depth: 1
       - run: i18n/action.sh
       - uses: peter-evans/create-pull-request@v4
+        with:
+          branch: chore/update-pot
+          branch-suffix: timestamp
+          author: Xing Xing <wadexing@gmail.com>
+          token: ${{ secrets.GH_TOKEN }}
+          title: 'chore(i18n): automtic update POT file'
