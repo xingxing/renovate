@@ -1,5 +1,6 @@
 import type { Preset } from '../types';
 import * as monorepos from './monorepo';
+import { gt } from '../../../i18n';
 
 const nonPinUpdateTypes = ['digest', 'patch', 'minor', 'major'];
 
@@ -45,8 +46,9 @@ const staticGroups = {
     ],
   },
   recommended: {
-    description:
-      'Use curated list of recommended non-monorepo package groupings.',
+    description: gt.gettext(
+      'Use curated list of recommended non-monorepo package groupings.'
+    ),
     extends: [
       'group:nodeJs',
       'group:allApollographql',
@@ -704,7 +706,7 @@ for (const monorepo of Object.keys(monorepos.presets)) {
   };
 }
 config.monorepos = {
-  description: 'Group known monorepo packages together.',
+  description: gt.gettext('Group known monorepo packages together.'),
   ignoreDeps: [],
   extends: monorepoNames,
 };

@@ -1,9 +1,12 @@
 import type { Preset } from '../types';
+import { gt } from '../../../i18n';
 
 export const presets: Record<string, Preset> = {
   all: {
     description: [
-      'A collection of workarounds for known problems with packages.',
+      gt.gettext(
+        'A collection of workarounds for known problems with packages.'
+      ),
     ],
     extends: [
       'workarounds:mavenCommonsAncientVersion',
