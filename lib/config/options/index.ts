@@ -2421,7 +2421,7 @@ const options: RenovateOptions[] = [
   },
   {
     name: 'locale',
-    description: `User-facing text language`,
+    description: 'User-facing text language',
     type: 'string',
     default: 'en',
     globalOnly: true,
