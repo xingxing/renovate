@@ -7,6 +7,7 @@ on:
   workflow_dispatch: # click the button on GitHub repo
 
 permissions:
+  actions: write
   contents: write
 
 jobs:
@@ -15,12 +16,9 @@ jobs:
     name: Sync latest commits from upstream repo
 
     steps:
-      # REQUIRED step
-      # Step 1: run a standard checkout action, provided by github
       - name: Checkout xingxing/renovate:i18n
         uses: actions/checkout@v3
         with:
-          repository: 'xingxing/renovate'
           ref: i18n
 
       - name: Get the latest tag of the upstream repo
@@ -34,14 +32,9 @@ jobs:
         run: echo "$LATEST_TAG"
 
       - name: Sync upstream changes
-        id: sync
-        uses: aormsby/Fork-Sync-With-Upstream-action@v3.2
-        with:
-          target_sync_branch: i18n
-          target_repo_token: ${{ secrets.GH_TOKEN }}
-          upstream_sync_branch: ${{ env.LATEST_TAG }}
-          upstream_sync_repo: 'renovatebot/renovate'
-          git_config_user: 'Xing Xing'
-          git_config_email: 'wadexing@gmail.com'
-          git_config_pull_rebase: 'true'
-          target_branch_push_args: '--force-with-lease'
+        run: |
+          git remote add -t main upstream https://github.com/renovatebot/renovate.git
+          git fetch --tags upstream
+          git rebase $(git rev-parse tags/${LATEST_TAG})
+          git status
+          #git push --force-with-lease origin i18n
