@@ -45,4 +45,3 @@ jobs:
           git_config_email: 'wadexing@gmail.com'
           git_config_pull_rebase: 'true'
           target_branch_push_args: '--force-with-lease'
-          test_mode: true
