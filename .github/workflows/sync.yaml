@@ -15,12 +15,9 @@ jobs:
     name: Sync latest commits from upstream repo
 
     steps:
-      # REQUIRED step
-      # Step 1: run a standard checkout action, provided by github
       - name: Checkout xingxing/renovate:i18n
         uses: actions/checkout@v3
         with:
-          repository: 'xingxing/renovate'
           ref: i18n
 
       - name: Get the latest tag of the upstream repo
@@ -44,4 +41,4 @@ jobs:
           git_config_user: 'Xing Xing'
           git_config_email: 'wadexing@gmail.com'
           git_config_pull_rebase: 'true'
-          target_branch_push_args: '--force-with-lease'
+          target_branch_push_args: '--force'
