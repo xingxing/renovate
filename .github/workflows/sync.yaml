@@ -19,12 +19,13 @@ jobs:
       - name: Checkout xingxing/renovate:i18n
         uses: actions/checkout@v3
         with:
-          ref: i18n
+          fetch-depth: 0
 
       - name: Get the latest tag of the upstream repo
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         run: |
+          set -ex
           export LATEST_TAG=$(curl "https://api.github.com/repos/renovatebot/renovate/releases/latest" --silent -H "Authorization: token ${{secrets.GITHUB_TOKEN}}" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
           echo "::set-env name=LATEST_TAG::$LATEST_TAG"
 
@@ -33,8 +34,31 @@ jobs:
 
       - name: Sync upstream changes
         run: |
-          git remote add -t main upstream https://github.com/renovatebot/renovate.git
-          git fetch --tags upstream
+          set -ex
+          git config --global user.email "wadexing@gmail.com"
+          git config --global user.name "Xing Xing"
+          git checkout i18n
+          git remote add upstream https://github.com/renovatebot/renovate.git
+          git fetch --quiet --tags upstream
           git rebase $(git rev-parse tags/${LATEST_TAG})
           git status
-          #git push --force-with-lease origin i18n
+          git push --force-with-lease origin i18n
+
+      - name: Create release
+        uses: 'actions/github-script@v5'
+        with:
+          github-token: '${{ secrets.GH_TOKEN }}'
+          script: |
+            try {
+              await github.rest.repos.createRelease({
+                draft: false,
+                generate_release_notes: true,
+                name: `${process.env.LATEST_TAG}-i18n`,
+                owner: context.repo.owner,
+                prerelease: false,
+                repo: context.repo.repo,
+                tag_name: `${process.env.LATEST_TAG}-i18n`,
+              });
+            } catch (error) {
+              core.setFailed(error.message);
+            }
