@@ -2,7 +2,7 @@ import * as util from 'util';
 import is from '@sindresorhus/is';
 import { configFileNames } from '../../../../config/app-strings';
 import type { RenovateConfig } from '../../../../config/types';
-import { gt } from '../../../../i18n';
+import { gettext } from '../../../../i18n';
 import { logger } from '../../../../logger';
 import type { PackageFile } from '../../../../modules/manager/types';
 import { emojify } from '../../../../util/emoji';
@@ -47,23 +47,23 @@ export function getConfigDesc(
     return '';
   }
   logger.debug({ length: descriptionArr.length }, 'Found description array');
-  let desc = `\n### ${gt.gettext(
+  let desc = `\n### ${gettext(
     "Configuration Summary\n\nBased on the default config's presets, Renovate will:"
   )}\n\n`;
-  desc += `  - ${gt.gettext(
+  desc += `  - ${gettext(
     'Start dependency updates only once this onboarding PR is merged'
   )}\n`;
   descriptionArr.forEach((d) => {
-    desc += `  - ${gt.gettext(d)}\n`;
+    desc += `  - ${gettext(d)}\n`;
   });
   desc += '\n';
   desc += emojify(
-    `:abcd: ${gt.gettext(
+    `:abcd: ${gettext(
       'Would you like to change the way Renovate is upgrading your dependencies?'
     )}`
   );
   desc += ` ${util.format(
-    gt.gettext(
+    gettext(
       'Simply edit the `%s` in this branch with your custom config and the list of Pull Requests in the "What to Expect" section below will be updated the next time Renovate runs.'
     ),
     configFile
