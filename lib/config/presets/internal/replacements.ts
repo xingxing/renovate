@@ -1,4 +1,4 @@
-import { gettext } from '../../../i18n';
+import { _ } from '../../../i18n';
 import type { Preset } from '../types';
 import {
   PresetTemplate,
@@ -9,7 +9,7 @@ import {
 /* eslint sort-keys: ["error", "asc", {"caseSensitive": false, "natural": true}] */
 export const presets: Record<string, Preset> = {
   all: {
-    description: gettext('All replacements.'),
+    description: _('All replacements.'),
     extends: [
       'replacements:babel-eslint-to-eslint-parser',
       'replacements:cucumber-to-scoped',
@@ -29,9 +29,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'babel-eslint-to-eslint-parser': {
-    description: gettext(
-      '`babel-eslint` was renamed under the `@babel` scope.'
-    ),
+    description: _('`babel-eslint` was renamed under the `@babel` scope.'),
     packageRules: [
       {
         matchCurrentVersion: '>=7.11.0',
@@ -43,7 +41,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'cucumber-to-scoped': {
-    description: gettext('`cucumber` became scoped.'),
+    description: _('`cucumber` became scoped.'),
     packageRules: [
       {
         matchDatasources: ['npm'],
@@ -54,7 +52,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'fastify-to-scoped': {
-    description: gettext('`fastify` packages became scoped'),
+    description: _('`fastify` packages became scoped'),
     packageRules: [
       {
         matchCurrentVersion: '>=3.3.0 <4.0.0',
@@ -409,7 +407,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'hapi-to-scoped': {
-    description: gettext('`hapi` became scoped.'),
+    description: _('`hapi` became scoped.'),
     packageRules: [
       {
         matchCurrentVersion: '>=18.0.0',
@@ -421,7 +419,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'jade-to-pug': {
-    description: gettext('Jade was renamed to Pug.'),
+    description: _('Jade was renamed to Pug.'),
     packageRules: [
       {
         matchDatasources: ['npm'],
@@ -432,7 +430,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'joi-to-scoped': {
-    description: gettext('`joi` became scoped under the `hapi` organization.'),
+    description: _('`joi` became scoped under the `hapi` organization.'),
     packageRules: [
       {
         matchCurrentVersion: '>=14.0.0 <14.4.0',
@@ -444,7 +442,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'joi-to-unscoped': {
-    description: gettext('`joi` was moved out of the `hapi` organization.'),
+    description: _('`joi` was moved out of the `hapi` organization.'),
     packageRules: [
       {
         matchCurrentVersion: '>=17.0.0',
@@ -456,7 +454,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'middie-to-scoped': {
-    description: gettext('`middie` became scoped.'),
+    description: _('`middie` became scoped.'),
     packageRules: [
       {
         matchCurrentVersion: '>=7.1.0 <8.0.0',
@@ -468,7 +466,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'now-to-vercel': {
-    description: gettext('`now` was renamed to `vercel`.'),
+    description: _('`now` was renamed to `vercel`.'),
     packageRules: [
       {
         matchCurrentVersion: '>=21.0.0',
@@ -480,7 +478,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'parcel-css-to-lightningcss': {
-    description: gettext('`@parcel/css` was renamed `lightningcss`.'),
+    description: _('`@parcel/css` was renamed `lightningcss`.'),
     packageRules: [
       {
         matchDatasources: ['npm'],
@@ -491,7 +489,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'react-query-devtools-to-scoped': {
-    description: gettext(
+    description: _(
       '`react-query/devtools` became scoped under the `tanstack` organization.'
     ),
     packageRules: [
@@ -505,7 +503,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'react-query-to-scoped': {
-    description: gettext(
+    description: _(
       '`react-query` became scoped under the `tanstack` organization.'
     ),
     packageRules: [
@@ -519,7 +517,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'redux-devtools-extension-to-scope': {
-    description: gettext(
+    description: _(
       'The `redux-devtools-extension` package was renamed to `@redux-devtools/extension`.'
     ),
     packageRules: [
@@ -532,7 +530,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'renovate-pep440-to-renovatebot-pep440': {
-    description: gettext(
+    description: _(
       'The `@renovate/pep440` package was renamed to `@renovatebot/pep440`.'
     ),
     packageRules: [
@@ -545,7 +543,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'rollup-node-resolve-to-scoped': {
-    description: gettext('The node-resolve plugin for rollup became scoped.'),
+    description: _('The node-resolve plugin for rollup became scoped.'),
     packageRules: [
       {
         matchDatasources: ['npm'],
@@ -556,7 +554,7 @@ export const presets: Record<string, Preset> = {
     ],
   },
   'xmldom-to-scoped': {
-    description: gettext(
+    description: _(
       'The `xmldom` package is now published as `@xmldom/xmldom`.'
     ),
     packageRules: [
@@ -585,7 +583,7 @@ const muiReplacement: Replacement[] = [
 ];
 
 const mui: PresetTemplate = {
-  description: gettext(
+  description: _(
     'The `material-ui` monorepo org was renamed from `@material-ui` to `@mui`.'
   ),
   packageRules: {
