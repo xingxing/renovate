@@ -130,7 +130,6 @@ export interface RepoGlobalConfig {
   containerbaseDir?: string;
   platform?: string;
   endpoint?: string;
-  locale?: string;
   translationsFilePath?: string;
 }
 
