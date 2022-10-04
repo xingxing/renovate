@@ -2415,13 +2415,6 @@ const options: RenovateOptions[] = [
     default: true,
   },
   {
-    name: 'locale',
-    description: 'User-facing text language',
-    type: 'string',
-    default: 'en',
-    globalOnly: true,
-  },
-  {
     name: 'translationsFilePath',
     description: `PO (Portable Object) file's path`,
     type: 'string',
