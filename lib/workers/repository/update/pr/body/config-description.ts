@@ -59,7 +59,10 @@ export async function getPrConfigDescription(
   } else {
     prBody += _('Whenever PR becomes conflicted');
   }
-  prBody += `, ${_('or you tick the rebase/retry checkbox.')}\n\n`;
+  prBody += util.format(
+    ', %s\n\n',
+    _('or you tick the rebase/retry checkbox.')
+  );
   if (config.recreateClosed) {
     prBody += emojify(
       // TODO: types (#7154)
