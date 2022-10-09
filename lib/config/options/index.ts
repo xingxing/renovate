@@ -2430,6 +2430,7 @@ const options: RenovateOptions[] = [
     description: `The file path where PO (Portal Object) files are located`,
     type: 'string',
     globalOnly: true,
+    default: '',
   },
 ];
 
